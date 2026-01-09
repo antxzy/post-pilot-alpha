@@ -572,3 +572,25 @@
 .dayCell.isSelected .dayNumber {
   color: rgba(255, 255, 255, 0.92);
 }
+/* ===============================
+   Pipeline: force readable text
+   =============================== */
+   .pipeWrap,
+   .pipeWrap * {
+     color: rgba(255, 255, 255, 0.92);
+   }
+   
+   /* Specifically make pipeline cards/chips inherit white text */
+   .pipeWrap .pipeCard,
+   .pipeWrap .pipeCardTitle,
+   .pipeWrap .pipeCardHook,
+   .pipeWrap .pipeDate,
+   .pipeWrap .pipeEmpty,
+   .pipeWrap .pipeColTitle,
+   .pipeWrap .pipeCount,
+   .pipeWrap .pipeSub,
+   .pipeWrap .pipeTitle,
+   .pipeWrap button {
+     color: rgba(255, 255, 255, 0.92);
+   }
+   
