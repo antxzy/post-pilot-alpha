@@ -1,0 +1,574 @@
+/* Full-screen background (no yellow line) */
+.ppRoot {
+    min-height: 100vh;
+    background:
+      radial-gradient(1200px 600px at 15% 10%, rgba(139,92,246,0.22), transparent 60%),
+      radial-gradient(900px 520px at 85% 15%, rgba(56,189,248,0.12), transparent 55%),
+      radial-gradient(800px 520px at 50% 95%, rgba(139,92,246,0.12), transparent 55%),
+      linear-gradient(180deg, #070913 0%, #070913 100%);
+    padding-bottom: 48px;
+  }
+  
+  /* Centered layout */
+  .wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 14px 16px 56px;
+  }
+  
+  /* Top bar */
+  .topBar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(7, 9, 19, 0.72);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255,255,255,0.10);
+  }
+  
+  .topBarInner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 12px 16px;
+  }
+  
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .brandName {
+    font-size: 18px;
+    font-weight: 950;
+    letter-spacing: 0.2px;
+  }
+  .brandTag {
+    font-size: 12.5px;
+    opacity: 0.70;
+    margin-top: 2px;
+  }
+  .brandIcon { display: grid; place-items: center; }
+  
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  
+  .tabs {
+    display: inline-flex;
+    gap: 8px;
+    padding: 6px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.04);
+  }
+  .tab {
+    border: 1px solid transparent;
+    background: rgba(0,0,0,0.18);
+    color: rgba(236,244,255,0.80);
+    padding: 8px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-weight: 950;
+  }
+  .tab:hover { background: rgba(255,255,255,0.06); }
+  .tabOn {
+    background: rgba(139,92,246,0.18);
+    border-color: rgba(139,92,246,0.45);
+    color: rgba(236,244,255,0.96);
+  }
+  
+  /* Cards */
+  .card {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+    box-shadow: 0 22px 70px rgba(0, 0, 0, 0.55);
+  }
+  
+  .mainCard { padding: 14px; }
+  
+  .gridLayout {
+    margin-top: 14px;
+    display: grid;
+    grid-template-columns: 1fr 460px;
+    gap: 12px;
+    align-items: start;
+  }
+  @media (max-width: 1100px) {
+    .gridLayout { grid-template-columns: 1fr; }
+  }
+  
+  /* Inputs */
+  .btn, select, input, textarea {
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(0, 0, 0, 0.22);
+    color: rgba(236, 244, 255, 0.96);
+    padding: 9px 10px;
+    font-size: 13.5px;
+    outline: none;
+  }
+  
+  .btn {
+    cursor: pointer;
+    font-weight: 950;
+  }
+  .btn:hover { filter: brightness(1.06); }
+  .btn:active { transform: translateY(0.5px); }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+  .btnGhost { background: rgba(255, 255, 255, 0.06); }
+  
+  .row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  
+  /* Segmented (Month / Week) */
+  .seg {
+    display: inline-flex;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.14);
+    overflow: hidden;
+  }
+  .segBtn {
+    padding: 8px 10px;
+    background: rgba(0,0,0,0.18);
+    color: rgba(236,244,255,0.85);
+    border: none;
+    cursor: pointer;
+    font-weight: 900;
+  }
+  .segBtn:hover { background: rgba(255,255,255,0.06); }
+  .segOn { background: rgba(139, 92, 246, 0.18); color: rgba(236,244,255,0.95); }
+  
+  /* Calendar */
+  .calendarHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 4px 2px 10px;
+  }
+  .calLeft { display: flex; gap: 14px; align-items: center; }
+  .calTitle { margin: 0; font-weight: 950; font-size: 28px; letter-spacing: 0.2px; }
+  .calNav { display: flex; gap: 8px; align-items: center; }
+  .calendarHint { opacity: 0.65; font-size: 13px; }
+  
+  /* Month health */
+  .health { padding: 14px; margin: 10px 0 12px; }
+  .healthTop {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .healthTitle { font-weight: 950; font-size: 15px; }
+  .healthSub { opacity: 0.72; margin-top: 4px; font-size: 12.5px; }
+  .healthPills { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+  .pill {
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(0,0,0,0.18);
+    border: 1px solid rgba(255,255,255,0.12);
+    font-size: 12.5px;
+    opacity: 0.9;
+    font-weight: 800;
+  }
+  .healthTip { margin-top: 10px; opacity: 0.7; font-size: 12.5px; }
+  
+  /* DOW row */
+  .dowRow {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin: 10px 0 10px;
+  }
+  .dow { opacity: 0.55; font-size: 12px; padding: 0 6px; }
+  
+  /* Month grid */
+  .calendarGrid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+  }
+  .dayPad { border-radius: 12px; height: 112px; opacity: 0; }
+  
+  .dayCell {
+    background: rgba(0, 0, 0, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 14px;
+    padding: 10px 10px 12px;
+    height: 112px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .dayCell:hover { background: rgba(255, 255, 255, 0.07); }
+  
+  .daySelected {
+    border-color: rgba(139, 92, 246, 0.9);
+    box-shadow: 0 0 0 1px rgba(139, 92, 246, 0.55);
+  }
+  .dayCatchUp {
+    border-color: rgba(250, 204, 21, 0.35);
+    box-shadow: 0 0 0 1px rgba(250, 204, 21, 0.22);
+  }
+  
+  .dayTop { display: flex; justify-content: space-between; align-items: center; }
+  .dayNumber { font-weight: 900; font-size: 14px; opacity: 0.92; }
+  
+  .dayTitle {
+    font-weight: 800;
+    font-size: 13px;
+    opacity: 0.85;
+    line-height: 1.2;
+    max-height: 2.4em;
+    overflow: hidden;
+  }
+  
+  /* Progress bar */
+  .progressTrack {
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.08);
+    overflow: hidden;
+  }
+  .progressFill {
+    height: 100%;
+    border-radius: 999px;
+    background: rgba(139, 92, 246, 0.7);
+  }
+  
+  /* Week view */
+  .weekGrid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+  }
+  @media (max-width: 1100px) {
+    .weekGrid { grid-template-columns: 1fr; }
+  }
+  
+  .weekCard {
+    background: rgba(0,0,0,0.18);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 14px;
+    padding: 12px;
+    cursor: pointer;
+    display: grid;
+    gap: 10px;
+    text-align: left;
+  }
+  .weekCard:hover { background: rgba(255,255,255,0.07); }
+  
+  .weekTop { display: flex; justify-content: space-between; align-items: center; }
+  .weekDay { display: flex; gap: 8px; align-items: baseline; }
+  .weekDow { opacity: 0.75; font-weight: 900; font-size: 12.5px; }
+  .weekNum { font-weight: 950; font-size: 16px; }
+  .weekTitle { font-weight: 900; opacity: 0.9; font-size: 13px; min-height: 2.4em; }
+  
+  /* Editor panel */
+  .panel { padding: 14px; }
+  .panelTop {
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+  .panelTitle { font-weight: 950; font-size: 16px; }
+  .panelSub { opacity: 0.65; font-size: 12.5px; margin-top: 4px; }
+  
+  .field { display: grid; gap: 6px; margin-top: 10px; }
+  .field label { opacity: 0.75; font-size: 12.5px; }
+  
+  .fieldRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  @media (max-width: 1100px) {
+    .fieldRow { grid-template-columns: 1fr; }
+  }
+  
+  textarea { resize: vertical; min-height: 120px; }
+  
+  /* Platform pills + dots */
+  .platRow { display: flex; flex-wrap: wrap; gap: 8px; }
+  .platPill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 999px;
+    padding: 9px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(0, 0, 0, 0.18);
+    color: rgba(236, 244, 255, 0.85);
+    font-weight: 900;
+    cursor: pointer;
+  }
+  .platPill:hover { background: rgba(255, 255, 255, 0.06); }
+  .platOn {
+    border-color: rgba(139, 92, 246, 0.55);
+    background: rgba(139, 92, 246, 0.13);
+  }
+  
+  .dotRow { display: flex; gap: 6px; align-items: center; }
+  .pDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    display: inline-block;
+    box-shadow: 0 0 0 2px rgba(0,0,0,0.25);
+  }
+  
+  /* Platform colors (your requested mapping) */
+  .pTiktok { background: #0b0f19; }      /* black-ish */
+  .pYoutube { background: #ef4444; }     /* red */
+  .pInstagram { background: #a78bfa; }   /* purple vibe */
+  .pFacebook { background: #3b82f6; }    /* blue */
+  .pSnapchat { background: #facc15; }    /* yellow */
+  .pPinterest { background: #f472b6; }   /* pink */
+  
+  .subCard {
+    padding: 12px;
+    margin-top: 12px;
+    background: rgba(0,0,0,0.18);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 16px;
+  }
+  .subTitle { font-weight: 950; font-size: 13.5px; opacity: 0.95; }
+  .bullets {
+    margin: 8px 0 0;
+    padding-left: 16px;
+    opacity: 0.85;
+    font-size: 12.75px;
+  }
+  .bullets li { margin: 6px 0; }
+  
+  /* Checklist */
+  .checkGrid { display: grid; gap: 8px; margin-top: 8px; }
+  .checkItem {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 10px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.10);
+    background: rgba(255,255,255,0.03);
+    cursor: pointer;
+    font-weight: 850;
+    color: rgba(236,244,255,0.90);
+    text-align: left;
+  }
+  .checkItem:hover { background: rgba(255,255,255,0.06); }
+  .checkOn { border-color: rgba(139, 92, 246, 0.55); background: rgba(139, 92, 246, 0.12); }
+  .checkBox {
+    width: 14px;
+    height: 14px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(0,0,0,0.25);
+  }
+  .checkBoxOn { background: rgba(139, 92, 246, 0.75); border-color: rgba(139, 92, 246, 0.85); }
+  
+  /* Pipeline */
+  .pipeWrap { margin-top: 14px; }
+  .pipeHeader {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .pipeTitle { font-size: 22px; font-weight: 950; }
+  .pipeSub { opacity: 0.7; font-size: 12.5px; margin-top: 4px; }
+  
+  .pipeGrid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(220px, 1fr));
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
+  .pipeCol { padding: 12px; min-height: 520px; }
+  .pipeColHead {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .pipeColTitle { font-weight: 950; opacity: 0.92; }
+  .pipeCount {
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(0,0,0,0.18);
+    font-weight: 950;
+    font-size: 12.5px;
+    opacity: 0.9;
+  }
+  .pipeList { display: grid; gap: 10px; }
+  .pipeEmpty { opacity: 0.6; font-size: 12.5px; padding: 10px; }
+  
+  .pipeCard {
+    text-align: left;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.10);
+    background: rgba(0,0,0,0.18);
+    padding: 10px;
+    cursor: pointer;
+  }
+  .pipeCard:hover { background: rgba(255,255,255,0.06); }
+  
+  .pipeCardTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .pipeDate { font-weight: 900; opacity: 0.8; font-size: 12.5px; }
+  .pipeDots { display: flex; gap: 6px; }
+  .pipeCardTitle { font-weight: 950; margin-top: 6px; opacity: 0.95; }
+  .pipeCardHook {
+    margin-top: 6px;
+    opacity: 0.72;
+    font-size: 12.5px;
+    line-height: 1.2;
+  }
+  
+  /* -------- Landing page styles (src/app/page.tsx) -------- */
+  .homeRoot {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 30px 16px;
+    background:
+      radial-gradient(1200px 700px at 20% 10%, rgba(139,92,246,0.25), transparent 60%),
+      radial-gradient(900px 540px at 80% 20%, rgba(56,189,248,0.14), transparent 55%),
+      linear-gradient(180deg, #070913 0%, #070913 100%);
+  }
+  .homeGlow {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .homeCard {
+    width: min(620px, 100%);
+    border-radius: 22px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.06);
+    box-shadow: 0 22px 70px rgba(0,0,0,0.55);
+    padding: 18px;
+  }
+  .homeBrand {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .homeIcon {
+    width: 44px;
+    height: 44px;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(139,92,246,0.14);
+    box-shadow: 0 12px 45px rgba(0,0,0,0.35);
+  }
+  .homeTitle { font-size: 22px; font-weight: 950; }
+  .homeSub { opacity: 0.7; margin-top: 4px; }
+  
+  .homeBtn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 14px;
+    padding: 12px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(139,92,246,0.55);
+    background: rgba(139,92,246,0.16);
+    font-weight: 950;
+  }
+  .homeBtn:hover { filter: brightness(1.06); }
+  
+  .homeHint { margin-top: 10px; opacity: 0.7; font-size: 12.5px; }
+  /* ===========================
+   Calendar text readability fix
+   (put at BOTTOM of app.css)
+   =========================== */
+
+/* Default readable text inside the app shell */
+.appShell,
+.appShell * {
+  color: inherit;
+}
+
+/* Main surface text */
+.appShell {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* Calendar header + hints */
+.calendarHeader h2,
+.calendarHeaderTitle {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.calendarHint,
+.calendarHeaderHint {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* Weekday labels */
+.weekdayRow,
+.weekdayRow span,
+.calendarWeekdays span {
+  color: rgba(255, 255, 255, 0.60);
+}
+
+/* Day cards */
+.dayCard,
+.dayCell {
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.dayCard .dayNumber,
+.dayCell .dayNumber {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+/* Tiny preview text inside day cells */
+.dayCard .dayTitle,
+.dayCell .dayTitle,
+.dayCard .dayPreview,
+.dayCell .dayPreview {
+  color: rgba(255, 255, 255, 0.80);
+}
+
+/* Empty dash / placeholder */
+.dayCard .dayEmpty,
+.dayCell .dayEmpty,
+.dayCard .dash,
+.dayCell .dash {
+  color: rgba(255, 255, 255, 0.40);
+}
+
+/* Make the selected day pop without killing readability */
+.dayCard.isSelected,
+.dayCell.isSelected {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.dayCard.isSelected .dayNumber,
+.dayCell.isSelected .dayNumber {
+  color: rgba(255, 255, 255, 0.92);
+}
