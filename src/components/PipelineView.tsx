@@ -14,8 +14,19 @@ export default function PipelineView() {
   const groups = useMemo(() => {
     const map: Record<string, typeof entries[string][]> = {};
     for (const s of COLS) map[s] = [];
-    for (const e of Object.values(entries)) {
-      map[e.status].push(e);
+    for (const [key, entry] of Object.entries(entries)) {
+      if (!entry || typeof entry !== "object") continue;
+
+      const dateString =
+        typeof entry.dateString === "string" &&
+        /^\d{4}-\d{2}-\d{2}$/.test(entry.dateString)
+          ? entry.dateString
+          : key;
+
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(dateString)) continue;
+      if (!COLS.includes(entry.status)) continue;
+
+      map[entry.status].push({ ...entry, dateString });
     }
     for (const s of COLS) {
       map[s].sort((a, b) => a.dateString.localeCompare(b.dateString));
@@ -60,7 +71,7 @@ export default function PipelineView() {
                     <div className="pipeCardTop">
                       <div className="pipeDate">{e.dateString}</div>
                       <div className="pipeDots">
-                        {Object.entries(e.platforms)
+                        {Object.entries(e.platforms ?? {})
                           .filter(([, on]) => on)
                           .slice(0, 6)
                           .map(([p]) => (
