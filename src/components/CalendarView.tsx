@@ -34,18 +34,34 @@ export default function CalendarView() {
 
   const grid = getMonthGrid(currentYear, currentMonth);
 
-  const inMonth = Object.values(entries).filter((e) => {
-    const y = Number(e.dateString.slice(0, 4));
-    const m = Number(e.dateString.slice(5, 7)) - 1;
-    return y === currentYear && m === currentMonth;
+  // Imported/older entries can have a missing or non-string dateString.
+  // Read a valid date from the entry or its storage key without rewriting saved data.
+  const inMonth = Object.entries(entries).flatMap(([key, entry]) => {
+    if (!entry || typeof entry !== "object") return [];
+
+    const dateString =
+      typeof entry.dateString === "string" &&
+      /^\d{4}-\d{2}-\d{2}$/.test(entry.dateString)
+        ? entry.dateString
+        : key;
+
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(dateString)) return [];
+
+    const y = Number(dateString.slice(0, 4));
+    const m = Number(dateString.slice(5, 7)) - 1;
+    return y === currentYear && m === currentMonth
+      ? [{ ...entry, dateString }]
+      : [];
   });
 
-  const plannedDays = inMonth.filter((e) => e.title.trim().length > 0).length;
+  const plannedDays = inMonth.filter(
+    (e) => typeof e.title === "string" && e.title.trim().length > 0
+  ).length;
   const postedDays = inMonth.filter((e) => e.status === "posted").length;
 
   const platformTouches = inMonth.reduce((acc, e) => {
     let count = 0;
-    for (const p of ALL_PLATFORMS) if (e.platforms[p]) count++;
+    for (const p of ALL_PLATFORMS) if (e.platforms?.[p]) count++;
     return acc + count;
   }, 0);
 
@@ -113,12 +129,13 @@ export default function CalendarView() {
           const isSelected = selectedDate === cell.dateString;
           const e = entries[cell.dateString];
 
-          const dots = e ? ORDER.filter((p) => e.platforms[p]).slice(0, 6) : [];
-          const prog = e ? statusProgress(e.status) : 0.06;
+          const dots = e ? ORDER.filter((p) => e.platforms?.[p]).slice(0, 6) : [];
+          const prog = e ? (statusProgress(e.status) ?? 0.06) : 0.06;
 
           const catchUp =
             e &&
             isPast(cell.dateString) &&
+            typeof e.title === "string" &&
             e.title.trim().length > 0 &&
             e.status !== "posted";
 
@@ -138,7 +155,7 @@ export default function CalendarView() {
                 </div>
               </div>
 
-              <div className="dayTitle">{e?.title ? e.title : "—"}</div>
+              <div className="dayTitle">{typeof e?.title === "string" && e.title ? e.title : "—"}</div>
 
               <div className="progressTrack">
                 <div className="progressFill" style={{ width: `${Math.round(prog * 100)}%` }} />
