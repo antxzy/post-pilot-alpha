@@ -70,7 +70,7 @@ export default function Terminal() {
         if(!response.ok)throw new Error(json.error||`HTTP ${response.status}`);
         if(!active)return;
         setTokens(json.tokens||[]);setWarnings(json.warnings||[]);setUpdatedAt(json.refreshedAt||Date.now());
-        setSelected((prior)=>prior ? (json.tokens||[]).find((t)=>t.id===prior.id) || prior : json.tokens?.[0]||null);
+        setSelected((prior)=>(json.tokens||[]).find((t)=>t.id===prior?.id) || json.tokens?.[0] || null);
       }catch(e){if(active&&!controller.signal.aborted){setError(e instanceof Error?e.message:"Unable to fetch token data");setTokens([]);}}
       finally {if(active)setLoading(false);}
     }
